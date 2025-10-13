@@ -21,7 +21,7 @@
 // - UserRole: 'admin' | 'customer' | 'manager'
 // - OrderStatus: 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled'
 
-interface ApiResponse<T> {
+interface ApiResponse4<T> {
     data?: T | null;
     success: boolean;
     message?: string;
@@ -150,7 +150,7 @@ async function updateOrderStatus(orderId: number, newStatus: OrderStatus) {
 }
 
 // Функция для обработки результатов API
-function handleApiResponse<T>(response: ApiResponse<T>, onSuccess: (data: T) => void, onError: (error: string) => void) {
+function handleApiResponse<T>(response: ApiResponse4<T>, onSuccess: (data: T) => void, onError: (error: string) => void) {
     if (response.success && response.data) {
         onSuccess(response.data);
     } else {
@@ -199,7 +199,7 @@ class ApiState<T> {
 }
 
 // Композитная функция для загрузки данных с состоянием
-async function loadDataWithState<T>(apiCall: () => Promise<ApiResponse<T>>, state: ApiState<T>) {
+async function loadDataWithState<T>(apiCall: () => Promise<ApiResponse4<T>>, state: ApiState<T>) {
     state.setLoading(true);
     
     try {
@@ -258,3 +258,5 @@ async function exampleUsage() {
 
 // Раскомментируйте для тестирования (не будет работать без реального API)
 // exampleUsage();
+
+export{}
