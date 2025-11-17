@@ -1,6 +1,7 @@
 import { makeAutoObservable } from 'mobx';
 import { Question, Answer } from '../types5/quiz';
 import { mockQuestions } from '../data5/questions';
+import { QuestionPreview } from '../../generated/api/quizBattleAPI.schemas';
 
 /**
  * GameStore - MobX Store для управления игровой логикой
@@ -22,9 +23,9 @@ class GameStore {
 
   // Actions - методы для изменения состояния
 
-  startGame(questions: Question[]) {
+  startGame(questions: QuestionPreview[]) {
     this.gameStatus = 'playing';
-    this.questions = questions.map(item => ({...item, correctAnswer: -1}));
+    this.questions = questions.map(item => ({...item, correctAnswer: -1, options: item.options ?? []}));
     this.currentQuestionIndex = 0;
     this.score = 0;
     this.selectedAnswers = [];
